@@ -1,0 +1,4 @@
+{
+    "command": "npm run test",
+    "working_directory": "/home/kavia/workspace/code-generation/expresshellotimeapi-4219-916ce8b9/expresshello_timeapi"
+}
