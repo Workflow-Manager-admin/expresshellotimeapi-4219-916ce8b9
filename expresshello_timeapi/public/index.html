@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ExpressHelloTimeAPI Frontend</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f8f9fa;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 3em;
+    }
+    h1 {
+      color: #1976d2;
+      margin-bottom: 2em;
+    }
+    .action-section {
+      margin: 1em 0;
+      display: flex;
+      align-items: center;
+    }
+    button {
+      background: #1976d2;
+      color: #fff;
+      border: none;
+      padding: 0.6em 1.2em;
+      border-radius: 4px;
+      font-size: 1em;
+      cursor: pointer;
+      margin-right: 1em;
+      transition: background 0.2s ease;
+    }
+    button:hover {
+      background: #1355a1;
+    }
+    .response-area {
+      min-width: 200px;
+      min-height: 1.5em;
+      padding: 0.4em 0.8em;
+      border-radius: 2px;
+      background: #fff;
+      color: #222;
+      border: 1px solid #ddd;
+      font-family: monospace;
+      margin-left: 0.5em;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+  <h1>ExpressHelloTimeAPI</h1>
+
+  <div class="action-section">
+    <button id="getHelloBtn">Get Hello</button>
+    <span id="helloResult" class="response-area"></span>
+  </div>
+  <div class="action-section">
+    <button id="getTimeBtn">Get Time</button>
+    <span id="timeResult" class="response-area"></span>
+  </div>
+
+  <script>
+    // Fetch /hello endpoint and display result
+    document.getElementById('getHelloBtn').onclick = async function () {
+      const helloResult = document.getElementById('helloResult');
+      helloResult.textContent = '...';
+      try {
+        const res = await fetch('/hello');
+        if (!res.ok) throw new Error('Error: ' + res.status);
+        const data = await res.json();
+        helloResult.textContent = data.message || JSON.stringify(data);
+      } catch (err) {
+        helloResult.textContent = 'Failed: ' + err.message;
+      }
+    };
+
+    // Fetch /time endpoint and display result
+    document.getElementById('getTimeBtn').onclick = async function () {
+      const timeResult = document.getElementById('timeResult');
+      timeResult.textContent = '...';
+      try {
+        const res = await fetch('/time');
+        if (!res.ok) throw new Error('Error: ' + res.status);
+        const data = await res.json();
+        timeResult.textContent = data.time || JSON.stringify(data);
+      } catch (err) {
+        timeResult.textContent = 'Failed: ' + err.message;
+      }
+    };
+  </script>
+</body>
+</html>
